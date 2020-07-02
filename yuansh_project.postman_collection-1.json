@@ -1,0 +1,1176 @@
+{
+	"info": {
+		"_postman_id": "276f52e0-58a8-4e65-8ecc-1cbb5b74569e",
+		"name": "cs493_final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post admin 406",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a593e585-fa63-472b-b109-7e10c977500e",
+						"exec": [
+							"pm.test(\"Status code is 406\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"ser4334gee@gmail.com\",\n\t\"password\": \"00000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/admin",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post admin w/ missing field 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad60c133-08aa-4777-8db4-3447f85dd891",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"testadqdq@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/admin",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post admin 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b44d5752-877a-4373-9925-96dfd0dbf88c",
+						"exec": [
+							"pm.environment.set(\"admin_id\", pm.response.json()[\"id\"]);",
+							"pm.environment.set(\"token\", pm.response.json()[\"token\"]);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"123rtgeiunu1b@gmail.com\",\n\t\"password\": \"00000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/admin",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post another admin 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "833d94d1-3143-43b5-a591-318c8fb5641f",
+						"exec": [
+							"pm.environment.set(\"admin_id\", pm.response.json()[\"id\"]);",
+							"pm.environment.set(\"secondToken\", pm.response.json()[\"token\"]);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"121rfew123@gmail.com\",\n\t\"password\": \"00000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/admin",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get admins 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7841c27c-597c-410f-b76b-c3c0a5c1df2e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/admin",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get admin w/ id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c10d0ac-b5fb-44dd-9db7-ea91ff73c3fe",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/admin/{{admin_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"admin",
+						"{{admin_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post customer w/o auth 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c4c9069c-8b44-4241-887a-0bc8d8dbe87e",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"yuansh@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post customer 406",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "633a27c5-ed84-4f62-8824-dae004defd70",
+						"exec": [
+							"pm.test(\"Status code is 406\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"yuansh@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b73fe32-0ccf-4c3d-b085-041e065e598f",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.environment.set(\"customer_id\", pm.response.json()[\"id\"]);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"yuansh@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get customers no auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db846f45-137e-46e6-bca9-e12bb0917c77",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get customes auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ff366df-c17f-41d6-b604-2d40c026c563",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get customes w/ id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f50e33b-322c-4b25-a312-8d13fe34b702",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch customer w/o auth 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0b579e3-b436-4c64-b19a-d761e62f01c8",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"yuansh@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch customer 406",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8758ade1-72fa-47ba-b8b9-9b203ad55dad",
+						"exec": [
+							"pm.test(\"Status code is 406\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Shize\",\n\t\"lastName\": \"Yuan\",\n\t\"email\": \"yuansh@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch customer 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5a05f63-75fa-4fc8-b587-ec6f8dc76dbc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"new\",\n\t\"lastName\": \"new\",\n\t\"email\": \"new@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a customer w/o auth 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16c8e9be-2039-49f0-8fac-a3bf0910391f",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a customer w/ invalid id 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "786ff53c-c497-4770-a7cc-0b8f07efd460",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{invalid_customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{invalid_customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete customer under another admin 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b2f699b-bdc6-4c4d-809b-1bb4286ca7ae",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{secondToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a customer 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "22ad78ce-aca8-48bb-b787-7772fc5cc206",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a customer 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cc9850d-f6c0-4546-9a7b-e35246275d21",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post project 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63381ebf-96f2-4a25-95b4-2088adeaa703",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.environment.set(\"project_id\", pm.response.json()[\"id\"]);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"title\",\n\t\"description\": \"description\",\n\t\"status\": \"status\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}/project",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get projects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be8dc78e-ae83-4749-9359-2db4e935c3a3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/project",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get projects for given customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "313bba86-6d31-48e5-b019-32d831b0410d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}/project",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get project w/ id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cf9af3a-0123-43e1-947d-f94543abe15b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/project/{{project_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"project",
+						"{{project_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change owner of project 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f31bcea9-f0a6-47b3-b7db-ced1dba6d1d6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{invalid_customer_id}}/project/{{project_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{invalid_customer_id}}",
+						"project",
+						"{{project_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get projects for old customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36e29ce7-3a9b-4aba-9339-3c8ff82df04a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/customer/{{customer_id}}/project",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"customer",
+						"{{customer_id}}",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch project",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d46e8fc-ca54-4fbd-a3e0-f2db04c8d1c5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"new\",\n\t\"status\": \"new\",\n\t\"description\": \"new description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/project/{{project_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"project",
+						"{{project_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete project w/ id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52de26cd-ff67-4381-ac3f-edb6fef3c69b",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/project/{{project_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"project",
+						"{{project_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
